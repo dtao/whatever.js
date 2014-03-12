@@ -19,25 +19,36 @@
    *
    * w.blah = function() { return 'blah'; };
    * w.blah(); // => 'blah'
+   *
+   * // Specifying defaults
+   * whatever({ foo: 'bar' }).foo; // => 'bar'
    */
-  function whatever() {
-    if (!(this instanceof whatever)) {
-      return new Proxy(function() {}, {
-        get: function(target, name) {
-          if (!(name in target)) {
-            target[name] = whatever();
-          }
-          return target[name];
-        },
-        set: function(target, name, value) {
-          target[name] = value;
-          return true;
-        },
-        apply: function(target, thisArg, args) {
-          return whatever();
+  function whatever(defaults) {
+    var original = function() {};
+
+    if (defaults) {
+      for (var prop in defaults) {
+        if (defaults.hasOwnProperty(prop)) {
+          original[prop] = defaults[prop];
         }
-      });
+      }
     }
+
+    return new Proxy(original, {
+      get: function(target, name) {
+        if (!(name in target)) {
+          target[name] = whatever();
+        }
+        return target[name];
+      },
+      set: function(target, name, value) {
+        target[name] = value;
+        return true;
+      },
+      apply: function(target, thisArg, args) {
+        return whatever();
+      }
+    });
   }
 
   if (typeof module === 'object' && (module && module.exports)) {

@@ -31,6 +31,16 @@ module.exports = (function() {
         w.blah = function() { return 'blah'; };
         expect(w.blah()).toEqual('blah');
       }
+    },
+
+    'var w = whatever({ foo: "bar" });': {
+      before: function() {
+        w = whatever({ foo: 'bar' });
+      },
+
+      'w.foo': function() {
+        expect(w.foo).toEqual('bar');
+      }
     }
   };
 }());
