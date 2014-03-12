@@ -4,7 +4,7 @@
   "description": "Whatevs, dude",
   "main": "whatever.js",
   "scripts": {
-    "test": "mocha --ui exports --harmony --harmony-proxies"
+    "test": "mocha --ui exports --reporter spec --harmony --harmony-proxies"
   },
   "repository": {
     "type": "git",
