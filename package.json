@@ -4,7 +4,7 @@
   "description": "Whatevs, dude",
   "main": "whatever.js",
   "scripts": {
-    "test": "node --harmony --harmony-proxies node_modules/.bin/autodoc -t whatever.js"
+    "test": "mocha --ui exports --harmony --harmony-proxies"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,8 @@
     "url": "https://github.com/dtao/whatever.js/issues"
   },
   "devDependencies": {
-    "autodoc": "~0.6.1"
+    "mocha": "^1.17.1",
+    "expect": "^0.1.1"
   },
   "dependencies": {
     "harmony-reflect": "0.0.12"
