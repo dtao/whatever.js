@@ -1,0 +1,32 @@
+{
+  "name": "whatever",
+  "version": "0.1.0",
+  "description": "Whatevs, dude",
+  "main": "whatever.js",
+  "scripts": {
+    "test": "node --harmony --harmony-proxies node_modules/.bin/autodoc -t whatever.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dtao/whatever.js"
+  },
+  "keywords": [
+    "testing",
+    "mocks",
+    "stubs",
+    "es6",
+    "harmony",
+    "proxy"
+  ],
+  "author": "Dan Tao <daniel.tao@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dtao/whatever.js/issues"
+  },
+  "devDependencies": {
+    "autodoc": "~0.6.1"
+  },
+  "dependencies": {
+    "harmony-reflect": "0.0.12"
+  }
+}
