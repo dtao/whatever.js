@@ -1,15 +1,13 @@
 # whatever.js
 
 This library lets you define objects that dynamically define properties as you try to access them
-(using ES6 Proxies). Its main use case is tests where you want to mock services without going to the
-trouble of setting up objects with the correct schema.
+(using [ES6 Proxies](http://wiki.ecmascript.org/doku.php?id=harmony:direct_proxies)). Its main use
+case is tests where you want to mock services without going to the trouble of setting up objects
+with the correct schema.
 
-For example:
+For example, instead of this...
 
 ```javascript
-var whatever = require('whatever');
-
-// Instead of this...
 stub(service).return({
   user: {
     firstName: 'joe',
@@ -26,7 +24,25 @@ stub(service).return({
     wuzzles: 1
   }
 });
+```
 
-// ...just go with this:
+...with whatever.js you can just go with this:
+
+```javascript
+var whatever = require('whatever.js');
+
 stub(service).return(whatever());
+```
+
+You can also specify defaults for only the properties you care about (e.g., for testing). Accesses
+to any other properties of the resulting object will just silently do nothing.
+
+```javascript
+stub(service).return(whatever({
+  user: {
+    firstName: 'Billy'
+  }
+}));
+
+assert.equal(greetUser(), 'Hello, Billy');
 ```
