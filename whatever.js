@@ -6,6 +6,12 @@
   }
 
   /**
+   * Creates an object (that can be called like a function) that dynamically
+   * defines properties as you try to access them. Once you set a property, it
+   * stays that way. You can optionally specify defaults in an argument.
+   *
+   * @param {Object=} defaults An optional object supplying default values.
+   *
    * @example
    * var w = whatever();
    *
