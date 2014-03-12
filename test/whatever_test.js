@@ -41,6 +41,24 @@ module.exports = (function() {
       'w.foo': function() {
         expect(w.foo).toEqual('bar');
       }
+    },
+
+    'var w = whatever({ foo: { bar: "baz" } });': {
+      before: function() {
+        w = whatever({ foo: { bar: 'baz' } });
+      },
+
+      'w.foo.bar': function() {
+        expect(w.foo.bar).toEqual('baz');
+      },
+
+      'w.foo.blah': function() {
+        expect(w.foo.blah).toNotEqual(null);
+      },
+
+      'w.foo.blah.blah.blah': function() {
+        expect(w.foo.blah.blah.blah).toNotEqual(null);
+      }
     }
   };
 }());

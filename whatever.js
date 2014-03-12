@@ -30,17 +30,7 @@
    * whatever({ foo: 'bar' }).foo; // => 'bar'
    */
   function whatever(defaults) {
-    var original = function() {};
-
-    if (defaults) {
-      for (var prop in defaults) {
-        if (defaults.hasOwnProperty(prop)) {
-          original[prop] = defaults[prop];
-        }
-      }
-    }
-
-    return new Proxy(original, {
+    var result = new Proxy(function() {}, {
       get: function(target, name) {
         if (!(name in target)) {
           target[name] = whatever();
@@ -53,6 +43,29 @@
       },
       apply: function(target, thisArg, args) {
         return whatever();
+      }
+    });
+
+    if (defaults) {
+      attachDefaults(result, defaults);
+    }
+
+    return result;
+  }
+
+  function attachDefaults(object, defaults) {
+    Object.keys(defaults).forEach(function(key) {
+      var value = defaults[key];
+
+      if (value && (typeof value === 'object')) {
+        // Initialize the whatever
+        object[key];
+
+        // Assign defaults to the whatever
+        attachDefaults(object[key], value);
+
+      } else {
+        object[key] = value;
       }
     });
   }
